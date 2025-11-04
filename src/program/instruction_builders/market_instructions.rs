@@ -7,7 +7,6 @@ use borsh::BorshSerialize;
 use solana_program::{
     instruction::{AccountMeta, Instruction},
     pubkey::Pubkey,
-    system_program,
 };
 use spl_associated_token_account::get_associated_token_address;
 
@@ -646,7 +645,7 @@ pub fn create_request_seat_instruction(payer: &Pubkey, market: &Pubkey) -> Instr
             AccountMeta::new(*market, false),
             AccountMeta::new(*payer, true),
             AccountMeta::new(seat, false),
-            AccountMeta::new_readonly(system_program::id(), false),
+            AccountMeta::new_readonly(solana_program::system_program::id(), false),
         ],
         data: PhoenixInstruction::RequestSeat.to_vec(),
     }
